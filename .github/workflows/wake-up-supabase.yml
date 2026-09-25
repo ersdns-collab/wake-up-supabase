@@ -37,7 +37,6 @@ jobs:
               url = proj.get("url", "").rstrip("/")
               key = proj.get("anon_key", "").strip()
               name = proj.get("name", f"project-{idx+1}")
-
               display_name = f"{name} ({url})"
 
               if not url or not key:
@@ -45,8 +44,8 @@ jobs:
                   has_error = True
                   continue
 
-              # Target Auth Health endpoint which reliably responds HTTP 200 across all key types
-              target_url = f"{url}/auth/v1/health"
+              # Use PostgREST so the request counts as real database activity for inactivity prevention.
+              target_url = f"{url}/rest/v1/"
               print(f"🌐 Pinging Database: {display_name}")
 
               req = urllib.request.Request(
