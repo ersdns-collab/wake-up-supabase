@@ -44,8 +44,8 @@ jobs:
                   has_error = True
                   continue
 
-              # PostgREST activity resets the inactivity timer. Publishable keys must not be sent as Bearer tokens.
-              target_url = f"{url}/rest/v1/"
+              # Query one exposed table: this creates real PostgREST activity without changing data.
+              target_url = f"{url}/rest/v1/apartments?select=*&limit=1"
               print(f"🌐 Pinging Database: {display_name}")
               headers = {"apikey": key}
               if not key.startswith("sb_publishable_"):
